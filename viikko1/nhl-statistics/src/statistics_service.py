@@ -26,57 +26,25 @@ class StatisticsService:
 
         return list(players_of_team)
 
-    def top(self, how_many, sort_by=1):
-        if sort_by == 1 or sort_by.value == 1:
-            def sort_by_points(player):
-                return player.points
-            
-            sorted_players = sorted(
-                self._players,
-                reverse=True,
-                key=sort_by_points
-            )
-             
-            result = []
-            i = 0
-            while i <= how_many - 1:
-                result.append(sorted_players[i])
-                i += 1
+    def top(self, how_many, sort_by=SortBy.POINTS):
+        key = None
+        if sort_by == SortBy.POINTS:
+            key = lambda player: player.points
+        elif sort_by == SortBy.GOALS:
+            key = lambda player: player.goals
+        elif sort_by == SortBy.ASSISTS:
+            key = lambda player: player.assists
 
-            return result  
+        sorted_players = sorted(
+            self._players,
+            reverse=True,
+            key=key
+        )
         
-        
-        if sort_by.value == 2:
-            def sort_by_goals(player):
-                return player.goals
+        result = []
+        i = 0
+        while i <= how_many - 1:
+            result.append(sorted_players[i])
+            i += 1
 
-            sorted_players = sorted(
-                self._players,
-                reverse=True,
-                key=sort_by_goals
-            )     
-
-            result = []
-            i = 0
-            while i <= how_many - 1:
-                result.append(sorted_players[i])
-                i += 1
-
-            return result            
-        if sort_by.value == 3:
-            def sort_by_assists(player):
-                return player.assists
-
-            sorted_players = sorted(
-                self._players,
-                reverse=True,
-                key=sort_by_assists
-            )     
-
-            result = []
-            i = 0
-            while i <= how_many - 1:
-                result.append(sorted_players[i])
-                i += 1
-
-            return result
+        return result
