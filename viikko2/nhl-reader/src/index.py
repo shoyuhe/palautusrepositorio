@@ -3,11 +3,8 @@ from rich.console import Console
 from rich.live import Live
 from rich.table import Table
 
-
-from player import Player
 from player_stats import PlayerStats
 from player_reader import PlayerReader
-import requests
 
 def main():
     url = "https://studies.cs.helsinki.fi/nhlstats/2024-25/players"
@@ -21,15 +18,15 @@ def main():
         nationality = input(f"Nationality {list_of_nationalities} ")
         players = stats.top_scorers_by_nationality(nationality)
 
-        TABLE_DATA =[]
+        table_data =[]
 
         for player in players:
-            TABLE_DATA.append([f"[cyan]{player.name}[/]", 
+            table_data.append([f"[cyan]{player.name}[/]",
             f"[magenta]{player.team}",
             f"[green]{player.goals}",
             f"[green]{player.assists}",
             f"[green]{player.points}"
-            ])        
+            ])
 
         table = Table(show_footer=False)
         table_centered = Align.center(table)
@@ -43,14 +40,12 @@ def main():
             table.add_column("Goals", justify='right', no_wrap=True)
             table.add_column("Assists", justify='right', no_wrap=True)
             table.add_column("Points", justify='right', no_wrap=True)
-            for row in TABLE_DATA:
+            for row in table_data:
                 table.add_row(*row)
 
-            table_width = console.measure(table).maximum
+            # table_width = console.measure(table).maximum
 
-            table.width = None        
+            # table.width = None
 
 if __name__ == "__main__":
     main()
-
-
