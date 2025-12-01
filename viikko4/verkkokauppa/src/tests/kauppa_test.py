@@ -128,3 +128,5 @@ class TestKauppa(unittest.TestCase):
         self.kauppa.tilimaksu("pekka", "12345")
         # varmistetaan, että arvot ovat oikeat
         self.pankki_mock.tilisiirto.assert_called_with("pekka", 2, "12345", "33333-44455", 6)
+
+#lisä kommentti haara tehtävään
