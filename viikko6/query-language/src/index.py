@@ -11,8 +11,7 @@ def main():
     query = QueryBuilder()
 
     matcher = (
-    query
-        .one_of(
+        query.one_of(
         query.plays_in("PHI")
             .has_at_least(10, "assists")
             .has_fewer_than(10, "goals"),
