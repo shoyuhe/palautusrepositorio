@@ -1,6 +1,5 @@
 from statistics import Statistics
 from player_reader import PlayerReader
-from matchers import And, HasAtLeast, PlaysIn, All, Not, HasFewerThan, Or
 from querybuilder import QueryBuilder
 
 def main():
