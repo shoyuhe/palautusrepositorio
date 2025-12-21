@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kivi-Paperi-Sakset</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 Kivi-Paperi-Sakset</h1>
+            <p class="subtitle">Pelaa klassista peliä tekoälyä vastaan tai ystävää vastaan!</p>
+        </header>
+
+        <!-- Menu Screen -->
+        <div id="menu-screen" class="screen active">
+            <div class="menu-content">
+                <h2>Valitse pelataanko</h2>
+                <button class="btn btn-large" onclick="startGameType('player_vs_player')">
+                    👥 Ihmistä vastaan
+                </button>
+                <button class="btn btn-large" onclick="startGameType('player_vs_ai')">
+                    🤖 Tekoälyä vastaan
+                </button>
+                <button class="btn btn-large" onclick="startGameType('player_vs_advanced_ai')">
+                    🧠 Parannettua tekoälyä vastaan
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-info">
+                <div class="score-board">
+                    <div class="score-item">
+                        <h3 id="player1-name">Pelaaja 1</h3>
+                        <p id="player1-score" class="score">0</p>
+                        <p class="countdown" id="player1-countdown"></p>
+                    </div>
+                    <div class="score-item middle">
+                        <p class="label">Tasapelit</p>
+                        <p id="draws-score" class="score">0</p>
+                    </div>
+                    <div class="score-item">
+                        <h3 id="player2-name">Pelaaja 2</h3>
+                        <p id="player2-score" class="score">0</p>
+                        <p class="countdown" id="player2-countdown"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="game-content" class="game-content">
+                <!-- Game content will be loaded here based on game type -->
+            </div>
+
+            <div class="last-round-info" id="last-round-info" style="display: none;">
+                <p id="last-round-text"></p>
+            </div>
+
+            <button class="btn btn-secondary" onclick="endGame()">Lopeta peli</button>
+        </div>
+
+        <!-- PvP Game -->
+        <div id="pvp-game" class="game-mode">
+            <div class="game-area">
+                <div class="player-section">
+                    <h3>Pelaaja 1</h3>
+                    <div class="moves">
+                        <button class="move-btn" onclick="setPlayer1Move('k')" data-move="k">
+                            ✋ Kivi
+                        </button>
+                        <button class="move-btn" onclick="setPlayer1Move('p')" data-move="p">
+                            📄 Paperi
+                        </button>
+                        <button class="move-btn" onclick="setPlayer1Move('s')" data-move="s">
+                            ✂️ Sakset
+                        </button>
+                    </div>
+                </div>
+
+                <div class="divider">VS</div>
+
+                <div class="player-section">
+                    <h3>Pelaaja 2</h3>
+                    <div class="moves">
+                        <button class="move-btn" onclick="setPlayer2Move('k')" data-move="k">
+                            ✋ Kivi
+                        </button>
+                        <button class="move-btn" onclick="setPlayer2Move('p')" data-move="p">
+                            📄 Paperi
+                        </button>
+                        <button class="move-btn" onclick="setPlayer2Move('s')" data-move="s">
+                            ✂️ Sakset
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="play-button-container">
+                <button id="play-btn" class="btn btn-play" onclick="playRoundPvP()" style="display: none;">
+                    Pelaa kierros
+                </button>
+            </div>
+        </div>
+
+        <!-- AI Game -->
+        <div id="ai-game" class="game-mode">
+            <div class="game-area">
+                <div class="player-section">
+                    <h3>Sinä</h3>
+                    <div class="moves">
+                        <button class="move-btn" onclick="playMoveAI('k')">
+                            ✋ Kivi
+                        </button>
+                        <button class="move-btn" onclick="playMoveAI('p')">
+                            📄 Paperi
+                        </button>
+                        <button class="move-btn" onclick="playMoveAI('s')">
+                            ✂️ Sakset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
